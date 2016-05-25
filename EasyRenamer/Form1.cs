@@ -30,14 +30,20 @@ namespace EasyRenamer
             {
                 button1.Visible = true;
                 _selectedPath = folderBrowserDialog1.SelectedPath;
-
-                AddFilesToGrid();
+                RefreshGrid();
             }
         }
 
-        private void AddFilesToGrid()
+        private void RefreshGrid()
         {
+            dataGridView1.Rows.Clear();
             FileInfo[] files = GetAllFiles(_selectedPath);
+            AddFilesToGrid(files);
+        }
+
+        private void AddFilesToGrid(FileInfo[] files)
+        {
+            
 
             foreach (FileInfo file in files)
             {
@@ -89,13 +95,10 @@ namespace EasyRenamer
                 
             }
 
-            dataGridView1.Rows.Clear();
+            
+            RefreshGrid();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void dataGridView1_DragEnter(object sender, DragEventArgs e)
         {
